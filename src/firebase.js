@@ -1,12 +1,21 @@
 import firebase from 'firebase';
 
+const {
+    REACT_APP_FIREBASE_API_KEY,
+    REACT_APP_FIREBASE_AUTH_DOMAIN,
+    REACT_APP_FIREBASE_PROJECT_ID,
+    REACT_APP_FIREBASE_STORAGE_BUCKET,
+    REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    REACT_APP_FIREBASE_APP_ID
+} = process.env;
+
 const firebaseConfig = {
-    apiKey: "AIzaSyAGGFc-8_KRqjGb_pvesMhuilSiyKT7yRU",
-    authDomain: "idobatakaigi-with-ham-8b011.firebaseapp.com",
-    projectId: "idobatakaigi-with-ham-8b011",
-    storageBucket: "idobatakaigi-with-ham-8b011.appspot.com",
-    messagingSenderId: "19295271203",
-    appId: "1:19295271203:web:57a063ce8a4cf3349bf496"
+    apiKey: REACT_APP_FIREBASE_API_KEY,
+    authDomain: REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: REACT_APP_FIREBASE_APP_ID
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -14,6 +23,5 @@ const database = firebase.database();
 const messagesRef = database.ref('messages');
 
 export const pushMessage = ({ name, text }) => {
-    messageRef.push({ name, text });
-
+    messagesRef.push({ name, text });
 }
