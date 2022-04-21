@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Avatar, ListItem, ListItemAvatar, ListItemText, makeStyles, Typography } from '@material-ui/core';
 
 import { gravatarPath } from '../gravatar';
@@ -8,12 +8,20 @@ const useStyles = makeStyles(() => ({
         display: 'inline',
     },
 }));
-const MessageItem = ({ name, text }) => {
+
+const MessageItem = ({ isLastItem, name, text }) => {
+    const ref = useRef(null);
     const classes = useStyles();
     const avatarPath = gravatarPath(name);
 
+    useEffect(() => {
+        if (isLastItem) {
+            ref.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [isLastItem]);
+
     return (
-        <ListItem divider={true}>
+        <ListItem divider={true} ref={ref}>
             <ListItemAvatar>
             <Avatar src={avatarPath} />
             </ListItemAvatar>
@@ -30,7 +38,7 @@ const MessageItem = ({ name, text }) => {
                 </Typography>
             }
             />
-      </ListItem>
+        </ListItem>
     );
 };
 
